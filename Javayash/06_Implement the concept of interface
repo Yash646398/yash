@@ -1,0 +1,40 @@
+// Define the interface
+interface Animal {
+    void sound();
+    void eat();
+}
+
+// Implementing class
+class Dog implements Animal {
+    public void sound() {
+        System.out.println("The dog barks.");
+    }
+
+    public void eat() {
+        System.out.println("The dog eats bones.");
+    }
+}
+
+// Another implementing class
+class Cat implements Animal {
+    public void sound() {
+        System.out.println("The cat meows.");
+    }
+
+    public void eat() {
+        System.out.println("The cat eats fish.");
+    }
+}
+
+// Main class
+public class InterfaceExample {
+    public static void main(String[] args) {
+        Animal myDog = new Dog();
+        myDog.sound();
+        myDog.eat();
+
+        Animal myCat = new Cat();
+        myCat.sound();
+        myCat.eat();
+    }
+}
