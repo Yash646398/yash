@@ -1,0 +1,15 @@
+public class ArrayExceptionWithFinally {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3};
+
+        try {
+            System.out.println("Accessing index 5: " + numbers[5]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Exception caught: " + e);
+        } finally {
+            System.out.println("Finally block: Always executed.");
+        }
+
+        System.out.println("Program continues...");
+    }
+}
