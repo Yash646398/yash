@@ -1,0 +1,37 @@
+//string example 
+public class StringExample {
+    public static void main(String[] args) {
+        String greeting = "Hello";
+        String name = "World";
+
+        // Concatenation
+        String message = greeting + " " + name + "!";
+
+        // Print the result
+        System.out.println(message);
+    }
+}
+
+//string methods
+
+public class StringMethods {
+    public static void main(String[] args) {
+        String str = "Java Programming";
+
+        System.out.println("Original String: " + str);
+        System.out.println("Length: " + str.length());
+        System.out.println("Uppercase: " + str.toUpperCase());
+        System.out.println("Lowercase: " + str.toLowerCase());
+        System.out.println("Substring (from index 5): " + str.substring(5));
+        System.out.println("Substring (5 to 11): " + str.substring(5, 11));
+        System.out.println("Contains 'gram': " + str.contains("gram"));
+        System.out.println("Character at index 2: " + str.charAt(2));
+        System.out.println("Index of 'a': " + str.indexOf('a'));
+        System.out.println("Last index of 'a': " + str.lastIndexOf('a'));
+        System.out.println("Starts with 'Java': " + str.startsWith("Java"));
+        System.out.println("Ends with 'ing': " + str.endsWith("ing"));
+        System.out.println("Is Empty: " + str.isEmpty());
+        System.out.println("Replace 'Java' with 'Python': " + str.replace("Java", "Python"));
+        System.out.println("Trimmed String: '" + str.trim() + "'");
+    }
+}
