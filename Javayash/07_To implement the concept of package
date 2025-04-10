@@ -1,0 +1,29 @@
+// File: mypackage/Animal.java
+package mypackage;
+
+public class Animal {
+    public void display() {
+        System.out.println("This is an animal.");
+    }
+}
+
+// File: TestPackage.java
+import mypackage.Animal;
+
+public class TestPackage {
+    public static void main(String[] args) {
+        Animal a = new Animal();
+        a.display();
+    }
+}
+//create directory structure 
+mypackage/
+    Animal.java
+TestPackage.java
+
+//compil 
+javac mypackage/Animal.java
+javac -cp . TestPackage.java
+
+//Run
+java TestPackage
