@@ -1,1 +1,61 @@
+CREATE TABLE Authors (
+    AuthorID INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
 
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY,
+    Title VARCHAR(100),
+    AuthorID INT,
+    Price DECIMAL(10,2),
+    FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID)
+);
+
+CREATE TABLE Issued (
+    BookID INT,
+    StudentID INT,
+    IssueDate DATE,
+    PRIMARY KEY (BookID, StudentID, IssueDate),
+    FOREIGN KEY (BookID) REFERENCES Books(BookID)
+);
+
+
+INSERT INTO Authors VALUES
+(1, 'J.K. Rowling'),
+(2, 'George Orwell'),
+(3, 'J.R.R. Tolkien');
+
+INSERT INTO Books VALUES
+(101, 'Harry Potter', 1, 750.00),
+(102, '1984', 2, 450.00),
+(103, 'The Hobbit', 3, 650.00);
+
+INSERT INTO Issued VALUES
+(101, 101, '2025-01-15'),
+(102, 102, '2025-02-10'),
+(103, 101, '2025-02-25');
+
+SELECT * FROM Books WHERE Price > 500;
+
+SELECT Books.* 
+FROM Books
+JOIN Issued ON Books.BookID = Issued.BookID
+WHERE Issued.StudentID = 101;
+
+SELECT COUNT(*) FROM Issued;
+
+SELECT Books.Title, Authors.Name
+FROM Books
+JOIN Authors ON Books.AuthorID = Authors.AuthorID;
+
+SELECT Books.Title
+FROM Books
+JOIN Issued ON Books.BookID = Issued.BookID
+WHERE MONTH(Issued.IssueDate) = 1
+
+INTERSECT
+
+SELECT Books.Title
+FROM Books
+JOIN Issued ON Books.BookID = Issued.BookID
+WHERE MONTH(Issued.IssueDate) = 2;
