@@ -1,0 +1,68 @@
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Dept VARCHAR(50)
+);
+
+CREATE TABLE Subjects (
+    SubjectID VARCHAR(10) PRIMARY KEY,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Marks (
+    StudentID INT,
+    SubjectID VARCHAR(10),
+    MarksObtained INT,
+    PRIMARY KEY (StudentID, SubjectID),
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (SubjectID) REFERENCES Subjects(SubjectID)
+);
+
+INSERT INTO Students VALUES
+(1, 'Ravi', 'CSE'),
+(2, 'Priya', 'ECE'),
+(3, 'Aman', 'ME');
+
+INSERT INTO Subjects VALUES
+('S101', 'Mathematics'),
+('S102', 'Physics'),
+('S103', 'Chemistry');
+
+INSERT INTO Marks VALUES
+(1, 'S101', 85),
+(1, 'S102', 65),
+(2, 'S101', 90),
+(2, 'S103', 30),
+(3, 'S102', 50),
+(3, 'S103', 25);
+
+SELECT * FROM Marks WHERE MarksObtained > 75;
+
+SELECT DISTINCT Subjects.*
+FROM Subjects
+JOIN Marks ON Subjects.SubjectID = Marks.SubjectID
+WHERE Marks.MarksObtained < 35;
+
+SELECT SubjectID, AVG(MarksObtained) AS AverageMarks
+FROM Marks
+GROUP BY SubjectID;
+
+SELECT StudentID
+FROM Marks
+WHERE SubjectID = 'S101'
+
+INTERSECT
+
+SELECT StudentID
+FROM Marks
+WHERE SubjectID = 'S102';
+
+SELECT Students.Name, Subjects.Name, Marks.MarksObtained
+FROM Marks
+JOIN Students ON Marks.StudentID = Students.StudentID
+JOIN Subjects ON Marks.SubjectID = Subjects.SubjectID;
+
+
+
+
+
