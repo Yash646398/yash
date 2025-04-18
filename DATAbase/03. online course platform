@@ -1,0 +1,64 @@
+CREATE TABLE Instructors (
+    InstructorID INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Courses (
+    CourseID VARCHAR(10) PRIMARY KEY,
+    Title VARCHAR(100),
+    Duration INT,  -- Duration in months
+    InstructorID INT,
+    FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID)
+);
+
+CREATE TABLE Enrollments (
+    CourseID VARCHAR(10),
+    StudentID INT,
+    EnrollDate DATE,
+    PRIMARY KEY (CourseID, StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+
+INSERT INTO Instructors VALUES
+(1, 'John Doe'),
+(2, 'Jane Smith'),
+(3, 'Alan Turing');
+
+INSERT INTO Courses VALUES
+('C101', 'Data Structures', 4, 1),
+('C102', 'Web Development', 3, 2),
+('C103', 'Machine Learning', 6, 3);
+
+INSERT INTO Enrollments VALUES
+('C101', 201, '2025-02-15'),
+('C102', 202, '2025-03-01'),
+('C101', 203, '2025-03-10'),
+('C103', 201, '2025-04-05');
+
+SELECT StudentID FROM Enrollments WHERE CourseID = 'C101';
+
+SELECT * FROM Courses WHERE Duration > 3;
+
+SELECT CourseID, COUNT(*) AS EnrollmentCount
+FROM Enrollments
+GROUP BY CourseID;
+
+SELECT StudentID
+FROM Enrollments
+WHERE CourseID = 'C101'
+
+INTERSECT
+
+SELECT StudentID
+FROM Enrollments
+WHERE CourseID = 'C103';
+
+SELECT Courses.Title, Instructors.Name
+FROM Courses
+JOIN Instructors ON Courses.InstructorID = Instructors.InstructorID;
+
+
+
+
+
+
