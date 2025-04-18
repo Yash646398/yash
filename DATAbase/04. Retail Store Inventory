@@ -1,0 +1,68 @@
+CREATE TABLE Categories (
+    CategoryID INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    CategoryID INT,
+    Price DECIMAL(10,2),
+    FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+);
+
+CREATE TABLE Sales (
+    SaleID INT PRIMARY KEY,
+    ProductID INT,
+    Quantity INT,
+    SaleDate DATE,
+    StoreID VARCHAR(10),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+INSERT INTO Categories VALUES
+(1, 'Electronics'),
+(2, 'Groceries'),
+(3, 'Clothing');
+
+INSERT INTO Products VALUES
+(101, 'Laptop', 1, 55000.00),
+(102, 'Rice Bag', 2, 1200.00),
+(103, 'T-Shirt', 3, 500.00);
+
+INSERT INTO Sales VALUES
+(201, 101, 2, '2025-03-01', 'A'),
+(202, 102, 5, '2025-03-01', 'B'),
+(203, 103, 3, '2025-03-02', 'A'),
+(204, 102, 4, '2025-04-01', 'A');
+
+SELECT * FROM Products WHERE Price > 1000;
+
+SELECT Products.*
+FROM Products
+JOIN Sales ON Products.ProductID = Sales.ProductID
+WHERE Sales.SaleDate = '2025-03-01';
+
+SELECT ProductID, SUM(Quantity) AS TotalQuantity
+FROM Sales
+GROUP BY ProductID;
+
+SELECT ProductID
+FROM Sales
+WHERE StoreID = 'A'
+
+EXCEPT
+
+SELECT ProductID
+FROM Sales
+WHERE StoreID = 'B';
+
+SELECT Products.Name, Categories.Name
+FROM Products
+JOIN Categories ON Products.CategoryID = Categories.CategoryID;
+
+
+
+
+
+
