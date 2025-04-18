@@ -1,0 +1,60 @@
+CREATE TABLE Patients (
+    PatientID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Age INT,
+    Gender VARCHAR(10)
+);
+
+CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Specialization VARCHAR(100)
+);
+
+CREATE TABLE Appointments (
+    AppointmentID INT PRIMARY KEY,
+    PatientID INT,
+    DoctorID INT,
+    Date DATE,
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+);
+
+INSERT INTO Patients VALUES
+(1, 'Alice', 65, 'Female'),
+(2, 'Bob', 45, 'Male'),
+(3, 'Charlie', 72, 'Male');
+
+INSERT INTO Doctors VALUES
+(201, 'Dr. Smith', 'Cardiology'),
+(202, 'Dr. Brown', 'Neurology'),
+(203, 'Dr. Adams', 'Orthopedics');
+
+INSERT INTO Appointments VALUES
+(1001, 1, 202, '2025-03-15'),
+(1002, 2, 201, '2025-04-10'),
+(1003, 3, 202, '2025-04-20');
+
+SELECT * FROM Patients WHERE Age > 60;
+
+SELECT * FROM Appointments WHERE DoctorID = 202;
+
+SELECT DoctorID, COUNT(*) AS AppointmentCount
+FROM Appointments
+GROUP BY DoctorID;
+
+SELECT *
+FROM Appointments
+WHERE MONTH(Date) = 3
+
+INTERSECT
+
+SELECT *
+FROM Appointments
+WHERE MONTH(Date) = 4;
+
+SELECT Patients.Name, Doctors.Name
+FROM Appointments
+JOIN Patients ON Appointments.PatientID = Patients.PatientID
+JOIN Doctors ON Appointments.DoctorID = Doctors.DoctorID;
+
